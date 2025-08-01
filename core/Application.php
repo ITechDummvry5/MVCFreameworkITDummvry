@@ -2,21 +2,33 @@
 
 namespace app\core;
 
+
 /**
  * @author: CarmillaIT 
  * @package: app\core
  */
 class Application {
-
+    public static string $ROOT_DIR;
     public Router $router;
     public Request $request;
+    public Response $response;
+    public static Application $app;
 
-    public function __construct() {
+    public function __construct($rootPath) {
+        
+        //[0] Set the root directory for the application because it is used to locate files layout and views and 
+        self::$ROOT_DIR = $rootPath;
+        self::$app = $this;
         // [1] Create a new Request object to handle current HTTP request
         $this->request = new Request();
 
+        // [3] Create a Response Object to handle http Responses  also make sure it first before the router 
+        $this->response = new Response(); 
+
         // [2] Create a Router and inject the Request (dependency injection)
-        $this->router = new Router($this->request);
+        $this->router = new Router($this->request, $this->response);
+
+
     }
 
     public function run() {

@@ -3,10 +3,15 @@
 // [1] Autoload all classes using Composer's autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// echo'<pre>';
+// var_dump(__DIR__);
+// echo'<pre>';
+// exit;
+
 use app\core\Application;
 
 // [2] Instantiate the main Application class (bootstraps app)
-$app = new Application();
+$app = new Application(dirname(__DIR__));
 
 /**
  * @author: CarmillaIT 
@@ -14,14 +19,11 @@ $app = new Application();
  */
 
 // [3] Define a route for `/` with a closure that returns a string
-$app->router->get('/', function(){
-    return 'Hello, World!';
-});
+$app->router->get('/', 'home');
+
 
 // [4] Define another route for `/contact`
-$app->router->get('/contact', function(){
-    return 'Hello, World! Contact Page';
-});
+$app->router->get('/contact', 'contact');
 
 // [5] Start the app and route resolution
 $app->run();

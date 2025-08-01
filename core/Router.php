@@ -5,14 +5,17 @@ namespace app\core;
 class Router {
 
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
     /**
      * @param \app\core\Request $request
+     * @param \app\core\Response $response
      */
-    public function __construct(\app\core\Request $request) {
+    public function __construct(Request $request , Response $response) {
         // [1] Save the incoming Request object
         $this->request = $request;
+        $this->response = $response;
     }
 
     // [2] Register a GET route and store the callback
@@ -29,8 +32,8 @@ class Router {
 
         if ($callback === false) {
             // [4] Route not found
-            http_response_code(404);
-            return "404 Not Found";
+          $this->response->setStatusCode(404);
+            return "Not Found";
         }
 
         if (is_callable($callback)) {
@@ -38,22 +41,31 @@ class Router {
             return call_user_func($callback);
         }
 
+        if (is_string($callback)) {
+            return $this->renderView($callback);
+        }
+
         // [6] If not a valid callback
-        return "Invalid route callback.";
+        return  call_user_func($callback);
     }
+    
+    public function renderView($view){
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($view);
+        return str_replace('{{content}}', $viewContent, $layoutContent );
+    }
+
+    protected function layoutContent(){
+        ob_start();
+        include_once Application::$ROOT_DIR . "/views/layouts/main.php";
+        return ob_get_clean();
+    }
+
+    protected function renderOnlyView($view){
+        ob_start();
+        include_once Application::$ROOT_DIR . "/views/$view.php";
+        return ob_get_clean();
+    }
+
 }
-
-// Simple Version of resolve method 
-//   public function resolve() {
-
-//         $path = $this->request->getPath();
-//         $method = $this->request->getMethod();
-//         $callback = $this->routes[$method][$path] ?? false;
-
-//         if ($callback === false) {
-//             http_response_code(404);
-//             return "404 Not Found";
-//         }
-//         echo call_user_func($callback);
-//     }
 
