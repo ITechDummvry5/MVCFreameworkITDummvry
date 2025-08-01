@@ -1,0 +1,15 @@
+{
+    "name": "carmilla-it/mvc-freamework",
+    "autoload": {
+        "psr-4": {
+           "app\\":"./"
+        }
+    },
+    "authors": [
+        {
+            "name": "ItechDummvry5",
+            "email": "itechdummvry@gmail.com"
+        }
+    ],
+    "require": {}
+}

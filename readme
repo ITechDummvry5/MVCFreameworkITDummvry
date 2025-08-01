@@ -1,0 +1,48 @@
+
+ Summary of How It Works
+ 
+1. index.php (Entry Point)
+Purpose: This is the first file that runs when someone visits your website.
+
+What it does:
+
+Loads Composer's autoloader (vendor/autoload.php) 
+
+Creates the Application instance 
+
+Defines all routes like / and /contact 
+
+Calls $app->run() to process the request 
+
+2. Application.php (App Engine)
+Purpose: The core app manager that ties everything together.
+
+What it does:
+
+Initializes a Request (gets the current URL + HTTP method)
+
+Initializes a Router (handles the registered routes)
+
+When run() is called, it triggers the router to resolve the current route
+
+3. Router.php (Traffic Controller)
+Purpose: Matches the current URL to a defined route and runs the matching code.
+
+What it does:
+
+Stores all defined routes in $routes
+
+Checks what the current URL and method are (via Request)
+
+If a match is found, it calls the callback (like your closure)
+
+If no match, returns a 404 Not Found
+
+4. Request.php (Inspector)
+Purpose: Understands the current HTTP request (what URL, what method).
+
+What it does:
+
+getPath() gets the URL path without query strings (/contact, not /contact?foo=1)
+
+getMethod() returns the method (GET, POST, etc.) in lowercase
