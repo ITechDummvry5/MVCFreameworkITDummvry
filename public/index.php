@@ -25,5 +25,10 @@ $app->router->get('/', 'home');
 // [4] Define another route for `/contact`
 $app->router->get('/contact', 'contact');
 
+$app->router->post('/contact', function(){
+ return "This is the contact page handling";
+});
+
+
 // [5] Start the app and route resolution
 $app->run();

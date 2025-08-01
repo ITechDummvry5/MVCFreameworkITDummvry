@@ -23,6 +23,12 @@ class Router {
         $this->routes['get'][$path] = $callback;
     }
 
+    // [2] Register a GET route and store the callback
+    public function post($path, $callback) {
+        $this->routes['post'][$path] = $callback;
+    }
+
+
     // [3] Find and execute the appropriate callback for the current route
     public function resolve() {
         $path = $this->request->getPath();        // e.g. `/contact`
