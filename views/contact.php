@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <h2>Contact Form</h2>
   <form method="post" action="/contact">
+    <H1>Fix Remove it</H1>
     <div class="mb-3">
       <label for="name" class="form-label">Full Name</label>
       <input type="text" class="form-control" name="name" placeholder="Enter your full name">
