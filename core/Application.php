@@ -34,5 +34,6 @@ class Application {
     public function run() {
         // [3] Resolve the current route and echo the response
         echo $this->router->resolve();
+        
     }
 }

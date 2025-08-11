@@ -3,10 +3,6 @@
 // [1] Autoload all classes using Composer's autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// echo'<pre>';
-// var_dump(__DIR__);
-// echo'<pre>';
-// exit;
 
 use app\core\Application;
 

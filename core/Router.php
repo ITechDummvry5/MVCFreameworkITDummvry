@@ -42,15 +42,14 @@ class Router {
             return "Not Found";
         }
 
-        if (is_callable($callback)) {
-            // [5] If the callback is a function, call it
-            return call_user_func($callback);
-        }
+        // if (is_callable($callback)) {
+        //     // [5] If the callback is a function, call it
+        //     return call_user_func($callback);
+        // }
 
         if (is_string($callback)) {
             return $this->renderView($callback);
         }
-
         // [6] If not a valid callback
         return  call_user_func($callback);
     }
