@@ -1,13 +1,13 @@
 {
-    "name": "carmilla-it/mvc-freamework",
+    "name": "carmilla-dummvry/mvc-freamework-it-dummvry",
     "autoload": {
         "psr-4": {
-           "app\\":"./"
+        "app\\": "./"
         }
     },
     "authors": [
         {
-            "name": "ItechDummvry5",
+            "name": "ITechDummvry5",
             "email": "itechdummvry@gmail.com"
         }
     ],
