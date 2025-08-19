@@ -14,15 +14,36 @@ class Request {
 
         return substr($path, 0, $position); // cut off the query string
 
-        // (this part below is unreachable and can be removed)
-        echo '<pre>';
-        var_dump($position);
-        echo '<pre>';
-        exit;
     }
 
     // [2] Return the request method in lowercase (get/post)
-    public function getMethod(){
-        return strtolower($_SERVER['REQUEST_METHOD'] ?? 'get');
+    public function method(){
+        return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+    
+    // [2] Return the request method in lowercase (get/post)
+    public function isGet(){
+        return $this->method() === 'get';
+    }    
+    // [2] Return the request method in lowercase (get/post)
+    public function isPost(){
+           return $this->method() === 'post';
+
+    }
+
+
+    public function getBody(){
+        $body = [];
+        if($this->isGet()){
+            foreach ($_GET as $key => $value) {
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }    
+        if($this->isPost()){
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        return $body;
     }
 }
