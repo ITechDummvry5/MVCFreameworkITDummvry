@@ -70,6 +70,19 @@ class Router {
         return ob_get_clean();
     }
 
+//  chatgpt   protected function layoutContent(){
+//     $layout = 'main';   // default layout
+
+//     if (Application::$app->controller) {
+//         $layout = Application::$app->controller->layout;
+//     }
+
+//     ob_start();
+//     include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
+//     return ob_get_clean();
+// }
+
+
     protected function renderOnlyView($view, $params = []){
         foreach($params as $key => $value){
             $$key = $value;

@@ -13,6 +13,7 @@ class Application {
     public Request $request;
     public Response $response;
     public Controller $controller;
+// chatgpt public ?Controller $controller = null;
     public static Application $app;
 
     public function __construct($rootPath) {
