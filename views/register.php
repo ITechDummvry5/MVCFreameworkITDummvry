@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <h2>Registration Form</h2>
-  <form method="" action="">
+
+  <form method="post" action="">
     
     <!-- First Name -->
     <div class="mb-3">
@@ -28,8 +29,8 @@
 
 <!-- Confirm Password -->
 <div class="mb-3">
-  <label for="confirm_password" class="form-label">Confirm Password</label>
-  <input type="password" class="form-control" name="confirm_password" placeholder="Re-enter your password" >
+  <label for="confirmPassword" class="form-label">Confirm Password</label>
+  <input type="password" class="form-control" name="confirmPassword" placeholder="Re-enter your password" >
 </div>
 
 
