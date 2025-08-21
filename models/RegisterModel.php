@@ -25,5 +25,14 @@ class RegisterModel extends Model   // 👈 extend Model here
             'confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
         ];
     }
+    public function labels() : array {
+        return [
+            'firstname' => 'First Name',
+            'lastname' => 'Last Name',
+            'email' => 'Email Address',
+            'password' => 'Password',
+            'confirmPassword' => 'Confirm Password'
+        ];
+    }
 
 }

@@ -1,40 +1,20 @@
 <div class="container mt-5">
   <h2>Registration Form</h2>
+  <?php $form = \app\form\Form::begin('', "post"); ?>
 
-  <form method="post" action="">
-    
-    <!-- First Name -->
-    <div class="mb-3">
-      <label for="firstname" class="form-label">First Name</label>
-      <input type="text" class="form-control" name="firstname" placeholder="Enter your first name" >
+  <div class="row">
+    <div class="col">
+      <?php echo $form->field($model, 'firstname'); ?>
     </div>
-
-    <!-- Last Name -->
-    <div class="mb-3">
-      <label for="lastname" class="form-label">Last Name</label>
-      <input type="text" class="form-control" name="lastname" placeholder="Enter your last name" >
+    <div class="col">
+      <?php echo $form->field($model, 'lastname'); ?>
     </div>
+  </div>
 
-    <!-- Email -->
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" name="email" placeholder="Enter your email" >
-    </div>
+  <?php echo $form->field($model, 'email'); ?>
+  <?php echo $form->field($model, 'password')->passwordField(); ?>
+  <?php echo $form->field($model, 'confirmPassword')->passwordField(); ?>
 
-<!-- Password -->
-<div class="mb-3">
-  <label for="password" class="form-label">Password</label>
-  <input type="password" class="form-control" name="password" placeholder="Enter your password" >
-</div>
-
-<!-- Confirm Password -->
-<div class="mb-3">
-  <label for="confirmPassword" class="form-label">Confirm Password</label>
-  <input type="password" class="form-control" name="confirmPassword" placeholder="Re-enter your password" >
-</div>
-
-
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <?php \app\form\Form::end(); ?>
 </div>

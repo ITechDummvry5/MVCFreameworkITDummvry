@@ -19,6 +19,14 @@ abstract class Model {
             }
         }
     }
+    // labels error messages representation
+    public function labels():array{
+        return [];
+    }
+    // get label for specific attribute
+    public function getLabel($att): string {
+        return $this->labels()[$att] ?? ucfirst($att);
+    }
 
     abstract public function rules(): array;
 
@@ -56,7 +64,10 @@ abstract class Model {
         $message = $this->errorMessages()[$rule] ?? '';
 
         // Always replace attribute name
-        $message = str_replace('{{ att }}', $att, $message);
+        // $message = str_replace('{{ att }}', $att, $message);
+
+        // Always replace attribute name  but with labels
+        $message = str_replace('{{ att }}', $this->getLabel($att), $message);
 
         // Replace any extra params (min, max, match, etc.)
         foreach ($params as $key => $value) {
@@ -65,7 +76,7 @@ abstract class Model {
 
         $this->errors[$att][] = $message;
     }
-
+    // error messages representation but with labels in the RegisterModel.php
     public function errorMessages(){
         return [
             self::RULE_REQUIRED => '{{ att }} is required',
@@ -75,4 +86,12 @@ abstract class Model {
             self::RULE_MATCH    => '{{ att }} must match {{ match }}'
         ];
     }
+public function hasError($att) {
+    return $this->errors[$att] ?? false;
+}
+
+public function getFirstError($att) {
+    return $this->errors[$att][0] ?? false;
+}
+
 }
