@@ -19,11 +19,11 @@ abstract class Model {
             }
         }
     }
-    // labels error messages representation
+    // labels error messages representation -Add
     public function labels():array{
         return [];
     }
-    // get label for specific attribute
+    // get label for specific attribute -Add
     public function getLabel($att): string {
         return $this->labels()[$att] ?? ucfirst($att);
     }

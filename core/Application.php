@@ -13,10 +13,13 @@ class Application {
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Database $db;
 // chatgpt public ?Controller $controller = null;
     public static Application $app;
 
-    public function __construct($rootPath) {
+    // public function __construct($rootPath)
+    public function __construct($rootPath , array $config)
+    {
         
         //[0] Set the root directory for the application because it is used to locate files layout and views and 
         self::$ROOT_DIR = $rootPath;
@@ -30,6 +33,8 @@ class Application {
         // [2] Create a Router and inject the Request (dependency injection)
         $this->router = new Router($this->request, $this->response);
 
+        // [4] Create a Database object
+        $this->db = new Database($config['db']);
 
     }
 

@@ -7,8 +7,17 @@ use app\controllers\AuthController;
 use app\controllers\SiteController;
 use app\core\Application;
 
+// Db to Env Super global
+$config= [
+    'db' =>[
+        'dsn' => $_ENV['DB_DSN'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+    ]
+    ];
+
 // [2] Instantiate the main Application class (bootstraps app)
-$app = new Application(dirname(__DIR__));
+$app = new Application(dirname(__DIR__), $config);
 
 /**
  * @author: CarmillaIT 
