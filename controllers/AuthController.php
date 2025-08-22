@@ -5,7 +5,7 @@ namespace app\controllers;   // 👈 add this so Router can find it
 use app\core\Controller;   // 👈 now PHP knows where to find Controller
 use app\core\Application;
 use app\core\Request;
-use app\models\RegisterModel;  // 👈 import the RegisterModel class clear
+use app\models\User;  // 👈 import the User Model class clear
 
 
 class AuthController extends Controller{
@@ -13,29 +13,25 @@ class AuthController extends Controller{
         $this->setLayout('auth');
         return $this->render('login');
     }
-
+    // Registerd new User in Db using model User and DbModel
         public function register(Request $request){
-        $registerModel = new RegisterModel();
+        $user = new User();
         if($request->isPost()){
-           
-            $registerModel->loadData($request->getBody());
+
+            $user->loadData($request->getBody());
 
 
-            if($registerModel->validate() && $registerModel->register()) { 
+            if($user->validate() && $user->registered()) { 
                 return 'Success';
         }
-        
-            // echo '<pre>';
-            // var_dump($registerModel->errors);
-            // echo '</pre>';
 
         return $this->render('register' , [
-            'model' => $registerModel
+            'model' => $user
         ]);
     }
         $this->setLayout('auth');
            return $this->render('register' , [
-            'model' => $registerModel
+            'model' => $user
         ]);
     }
     }

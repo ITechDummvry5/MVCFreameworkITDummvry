@@ -9,6 +9,7 @@ abstract class Model {
     public const RULE_MIN      = 'min';
     public const RULE_MAX      = 'max';
     public const RULE_MATCH    = 'match';
+    public const RULE_UNIQUE   = 'unique';
 
     public array $errors = [];
 
@@ -55,6 +56,19 @@ abstract class Model {
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addError($att, self::RULE_MATCH, ['match' => $rule['match']]);
                 }
+                if ($ruleName === self::RULE_UNIQUE){
+                    $className = $rule['class'];
+                    $uniqatt = $rule['attribute'] ?? $att;
+                    $tableName = $className::tableName();
+                    $statement =  Application::$app->db->prepare("SELECT * FROM $tableName WHERE $uniqatt = :$uniqatt");
+                    $statement->bindValue(":$uniqatt", $value);
+                    $statement->execute();
+                    $record = $statement->fetchObject();
+                    if ($record) {
+                        $this->addError($att, self::RULE_UNIQUE, ['field' => $att]);
+                    }
+
+                }
             }
         }
         return empty($this->errors);
@@ -76,14 +90,15 @@ abstract class Model {
 
         $this->errors[$att][] = $message;
     }
-    // error messages representation but with labels in the RegisterModel.php
+    // error messages representation but with labels in the User.php
     public function errorMessages(){
         return [
             self::RULE_REQUIRED => '{{ att }} is required',
             self::RULE_EMAIL    => '{{ att }} must be a valid email address',
             self::RULE_MIN      => '{{ att }} must be at least {{ min }} characters long',
             self::RULE_MAX      => '{{ att }} must not exceed {{ max }} characters',
-            self::RULE_MATCH    => '{{ att }} must match {{ match }}'
+            self::RULE_MATCH    => '{{ att }} must match {{ match }}',
+            self::RULE_UNIQUE   => '{{ att }} is already taken',
         ];
     }
 public function hasError($att) {

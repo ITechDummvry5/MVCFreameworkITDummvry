@@ -18,7 +18,7 @@ class Form{
     public function field(Model $model, $att){
         return new Field($model, $att);
     }
-    public function passfield(){
+    // public function passfield(){
         
-    }
+    // }
 }
