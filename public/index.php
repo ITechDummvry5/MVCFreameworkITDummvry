@@ -1,34 +1,29 @@
 <?php
 
-// [1] Autoload all classes using Composer's autoloader
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use app\controllers\AuthController;
 use app\controllers\SiteController;
 use app\core\Application;
 
-// Db to Env Super global
-$config= [
-    'db' =>[
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Load .env variables
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+// Config array from .env
+$config = [
+    'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD'],
     ]
-    ];
+];
 
-// [2] Instantiate the main Application class (bootstraps app)
+// Boot application
 $app = new Application(dirname(__DIR__), $config);
 
-/**
- * @author: CarmillaIT 
- * @package: app\core
- */
-
-// [3] Define a route for `/` with a closure that returns a string
+// Routes
 $app->router->get('/', [SiteController::class, 'home']);
-
-
-// [4] Define another route for `/contact`
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
 
@@ -37,5 +32,5 @@ $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 
-// [5] Start the app and route resolution
+// Run app
 $app->run();
