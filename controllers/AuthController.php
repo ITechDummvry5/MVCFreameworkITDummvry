@@ -2,8 +2,8 @@
 
 namespace app\controllers;   // 👈 add this so Router can find it
 
-use app\core\Controller;   // 👈 now PHP knows where to find Controller
 use app\core\Application;
+use app\core\Controller;   // 👈 now PHP knows where to find Controller
 use app\core\Request;
 use app\models\User;  // 👈 import the User Model class clear
 
@@ -22,7 +22,8 @@ class AuthController extends Controller{
 
 
             if($user->validate() && $user->registered()) { 
-                return 'Success';
+            Application::$app->session->setflash_message('success', 'Thanks for registering!');
+              Application::$app->response->redirect('/');
         }
 
         return $this->render('register' , [
@@ -34,4 +35,5 @@ class AuthController extends Controller{
             'model' => $user
         ]);
     }
+
     }

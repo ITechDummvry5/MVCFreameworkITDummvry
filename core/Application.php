@@ -14,6 +14,7 @@ class Application {
     public Response $response;
     public Controller $controller;
     public Database $db;
+    public Session $session;
 // chatgpt public ?Controller $controller = null;
     public static Application $app;
 
@@ -33,8 +34,12 @@ class Application {
         // [2] Create a Router and inject the Request (dependency injection)
         $this->router = new Router($this->request, $this->response);
 
-        // [4] Create a Database object
+        // [4] Create a Session object message
+        $this->session = new Session();
+
+        // [5] Create a Database object
         $this->db = new Database($config['db']);
+
 
     }
 

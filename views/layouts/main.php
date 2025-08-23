@@ -1,3 +1,7 @@
+<?php  
+use app\core\Application;
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -39,6 +43,12 @@
   </div>
 </nav>
 <div class="container mt-5">
+
+<?php if (Application::$app->session->getflash_message('success')): ?>
+    <div class="alert alert-success">
+        <?php echo Application::$app->session->getflash_message('success') ?>
+    </div>
+<?php endif; ?>
   {{content}}
 </div>
 
