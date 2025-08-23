@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var  \app\models\User $model
+ */
+?>
+
 <div class="container mt-5">
   <h2>Registration Form</h2>
   <?php $form = \app\form\Form::begin('', "post"); ?>

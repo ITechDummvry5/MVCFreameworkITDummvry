@@ -29,7 +29,7 @@ public function __toString(): string {
     </div>
     ',
         $this->att,                          // for attribute in label
-        ucfirst($this->att),                 // label text
+        $this->model->labels()[$this->att] ?? ucfirst($this->att),  // FOR THE lOGIN.PHP INPUTS
         $this->type,
         $this->model->hasError($this->att) ? ' is-invalid' : '', // input class
         $this->att,                          // name attribute
