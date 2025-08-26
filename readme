@@ -46,3 +46,5 @@ What it does:
 getPath() gets the URL path without query strings (/contact, not /contact?foo=1)
 
 getMethod() returns the method (GET, POST, etc.) in lowercase
+
+php -S localhost:8080 -t public

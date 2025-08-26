@@ -11,11 +11,14 @@ class Application {
 
     public string $userClass;
 
+
+    public string $layout = 'main';
+    
     public static string $ROOT_DIR;
     public Router $router;
     public Request $request;
     public Response $response;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public Database $db;
     public Session $session;
     public ?DbModel $user; // chatgpt public ?User $user;
@@ -57,11 +60,19 @@ class Application {
 
     }
 
-    public function run() {
-        // [3] Resolve the current route and echo the response
+public function run()
+{
+    try {
         echo $this->router->resolve();
-        
+    } catch (\Exception $e) {
+        $this->response->setStatusCode($e->getCode() ?: 500);
+        echo $this->router->renderView('_error', [
+            'exception' => $e
+        ]);
     }
+}
+
+
     public function getController(){
         return $this->controller;
     }

@@ -18,6 +18,10 @@ class SiteController extends Controller {
         return $this->render('contact');
     }
 
+    public function profile(){
+        return $this->render('profile');
+    }
+
     public function handleContact(Request $request) {
         // first Method with instance the Request $request
         $body = $request->getBody();

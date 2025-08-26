@@ -32,6 +32,10 @@ $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
+$app->router->get('/logout', [AuthController::class, 'logout']);
+                    //  [0]                           $action callback  [1]
+$app->router->get('/profile', [AuthController::class, 'profile']);
+
 
 // Run app
 $app->run();

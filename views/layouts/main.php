@@ -42,9 +42,14 @@ use app\core\Application;
          </ul>
          <?php else:?>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                  <a class="nav-link" href="/profile"> 
+                    Profile
+                  </a>
+              </li>
               <li class="nav-item">
                   <a class="nav-link" href="/logout">
-            <?php echo Application::$app->user->getDisplayName() ?>
+            <?php echo Application::$app->user->getDisplayName() ?> 
 (Logout)
                   </a>
               </li>
