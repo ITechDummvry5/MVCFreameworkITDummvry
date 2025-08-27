@@ -1,3 +1,6 @@
+<?php 
+$this->title = 'Profile';
+?>
 <div class="container mt-5">
   <h2>Profile Form</h2>
   <form method="post" action="">

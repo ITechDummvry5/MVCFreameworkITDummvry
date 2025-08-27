@@ -2,6 +2,7 @@
 /**
  * @var  \app\models\User $model
  */
+$this->title = 'Register';
 ?>
 
 <div class="container mt-5">

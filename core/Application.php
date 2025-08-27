@@ -20,6 +20,7 @@ class Application {
     public Response $response;
     public ?Controller $controller = null;
     public Database $db;
+    public View $view;
     public Session $session;
     public ?DbModel $user; // chatgpt public ?User $user;
 // chatgpt public ?Controller $controller = null;
@@ -48,6 +49,7 @@ class Application {
 
         // [5] Create a Database object
         $this->db = new Database($config['db']);
+        $this->view = new View();
 
         //access user without not directly   using in the publicfolder index
         $primaryValue = $this->session->get('user');
@@ -66,7 +68,7 @@ public function run()
         echo $this->router->resolve();
     } catch (\Exception $e) {
         $this->response->setStatusCode($e->getCode() ?: 500);
-        echo $this->router->renderView('_error', [
+        echo $this->view->renderView('_error', [
             'exception' => $e
         ]);
     }

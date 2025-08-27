@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\core\Controller;   // 👈 now PHP knows where to find Controller
 use app\core\Application;
 use app\core\Request;
+use app\core\Response;
+use app\models\ContactForm;
 
 class SiteController extends Controller {
     public function home() {
@@ -14,19 +16,28 @@ class SiteController extends Controller {
         return $this->render('home', $params);
     }
 
-    public function contact() {
-        return $this->render('contact');
+public function contact(Request $request, Response $response) {
+    $contact = new ContactForm();   // ✅ always create model
+
+    if ($request->isPost()) {
+        $contact->loadData($request->getBody());
+        if ($contact->validate() && $contact->send()) {
+            Application::$app->session->setFlash('success', 'Thanks for contacting us!');
+            // ✅ redirect only, no need to pass model here
+            return $response->redirect('/contact');
+        }
     }
+
+    // ✅ always render with model
+    return $this->render('contact', [
+        'model' => $contact
+    ]);
+}
+
 
     public function profile(){
         return $this->render('profile');
     }
 
-    public function handleContact(Request $request) {
-        // first Method with instance the Request $request
-        $body = $request->getBody();
-        // Second Method without instance the Request $request
-    // $body = Application::$app->request->getBody();
-        return 'Handling Contact Submitted data';
-    }
+
 }

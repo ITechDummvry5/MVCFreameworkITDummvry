@@ -1,21 +1,16 @@
-<div class="container mt-5">
-  <h2>Contact Form</h2>
-  <form method="post" action="">
-    <div class="mb-3">
-      <label for="name" class="form-label">Full Name</label>
-      <input type="text" class="form-control" name="name" placeholder="Enter your full name">
-    </div>
+<?php
+$this->title = 'Contact';
+/**
+ * @var  \app\models\ContactForm $model
+ */
 
-    <div class="mb-3">
-      <label for="text" class="form-label">Email</label>
-      <input type="text" class="form-control" name="email" placeholder="Enter your password">
-    </div>
+?>
 
-        <div class="mb-3">
-      <label for="subject" class="form-label">Subject</label>
-      <textarea class="form-control" name="subject" placeholder="Enter subject"></textarea>
-    </div>
-  
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
+<?php $form = \app\form\Form::begin('', "post"); ?>
+<?php echo $form->field($model, 'name') ?>
+<?php echo $form->field($model, 'email') ?>
+<?php echo $form->field($model, 'subject') ?>
+<button type="submit" class="btn btn-primary">Submit</button>
+<?php \app\form\Form::end(); ?>
+
+

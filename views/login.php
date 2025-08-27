@@ -3,6 +3,8 @@
  * @var  \app\models\User $model
  */
 
+$this->title = 'Log in';
+
 ?>
 
 <div class="container mt-5">
