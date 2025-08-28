@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use app\core\DB\Database;   //  import the new location
+use app\core\DB\DbModel;
 
 /**
  * @author: CarmillaIT 
@@ -22,7 +24,8 @@ class Application {
     public Database $db;
     public View $view;
     public Session $session;
-    public ?DbModel $user; // chatgpt public ?User $user;
+    public ?UserModel $user; // user access
+    // public ?DbModel $user; // user access anny of this 
 // chatgpt public ?Controller $controller = null;
     public static Application $app;
 
@@ -81,7 +84,7 @@ public function run()
     public function setController(Controller $controller){
         $this->controller = $controller;
     }
-    public function login(DbModel $user)
+    public function login(UserModel $user)
     {
         $this->user = $user;
         $primaryKey = $user->primaryKey();

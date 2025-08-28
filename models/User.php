@@ -3,7 +3,7 @@
 namespace app\models;
 
 use app\core\UserModel;
-use app\core\Model;
+
 
 class User extends UserModel  
 {

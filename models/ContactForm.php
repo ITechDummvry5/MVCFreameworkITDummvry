@@ -26,4 +26,9 @@ class ContactForm extends Model{
             'subject' => 'Subject',
         ];
     }
+    
+    
+public function send(){
+    return true;
+}
 }

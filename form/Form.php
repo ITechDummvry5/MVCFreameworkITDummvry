@@ -3,7 +3,7 @@
 namespace app\form;
 
 use app\core\Model;
-use app\form\Field;   // ✅ add this line
+use app\form\InputField;   // ✅ add this line
 
 
 class Form{
@@ -16,7 +16,7 @@ class Form{
         echo '</form>';
     }
     public function field(Model $model, $att){
-        return new Field($model, $att);
+        return new InputField($model, $att);
     }
     // public function passfield(){
         

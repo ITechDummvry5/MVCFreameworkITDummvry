@@ -22,7 +22,7 @@ public function contact(Request $request, Response $response) {
     if ($request->isPost()) {
         $contact->loadData($request->getBody());
         if ($contact->validate() && $contact->send()) {
-            Application::$app->session->setFlash('success', 'Thanks for contacting us!');
+            Application::$app->session->setflash_message('success', 'Thanks for contacting us!');
             // ✅ redirect only, no need to pass model here
             return $response->redirect('/contact');
         }
@@ -33,8 +33,6 @@ public function contact(Request $request, Response $response) {
         'model' => $contact
     ]);
 }
-
-
     public function profile(){
         return $this->render('profile');
     }
